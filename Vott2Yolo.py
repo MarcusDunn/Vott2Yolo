@@ -2,25 +2,7 @@ from dataclasses import dataclass
 from typing import Dict, List, Tuple
 from PIL import Image
 
-names: List[str] = [
-    "LCD_Screen",
-    "Seal",
-    "Continous_Amps",
-    "Electric_Rating",
-    "Service_Type",
-    "Phase_Number",
-    "Wire_Number",
-    "Meter_Type",
-    "KW_Max",
-    "Multiplier",
-    "Utility_Inventory_Number",
-    "Serial_Number",
-    "Dials",
-    "Manufacture_Date",
-    "Meter_Manufacture",
-    "Kilovolt_Amperes",
-    "Electric_Meter"
-]
+names: List[str] = []
 
 
 @dataclass
@@ -67,6 +49,9 @@ class VottData:
 
 
 def main():
+    namesFile: str = input("give an absolute path to the .names file for your yolo project")
+    for line in open(namesFile):
+        names.append(line)
     file: "File" = open("DefaultProject-export.csv", "r")
     data: Dict[str, List["VottData"]] = populate_data_from_csv(file)
     for k, v in data.items():
